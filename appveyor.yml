@@ -7,7 +7,7 @@ version: '{branch}-{build}'
 # Other branches can allow themselves.
 branches:
   only:
-    - master
+    - pymssql-test
 skip_branch_with_pr: false
 skip_tags: true
 
@@ -17,15 +17,7 @@ cache:
 # Match travis
 clone_depth: 50
 
-services:
-  - mysql
-  - postgresql
-
 environment:
-  MYSQL_PWD: "Password12!"
-  PGUSER: "postgres"
-  PGPASSWORD: "Password12!"
-
   global:
     # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
     # /E:ON and /V:ON options are not enabled in the batch script intepreter
@@ -39,130 +31,6 @@ environment:
       PYTHON_VERSION: "2.7"
       PYTHON_HOME: "C:\\Python27"
       db: mssql2014
-    - TOX_ENV: "py36-pymssql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: mssql2014
-    - TOXENV: "py27-mysql-connector-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27"
-      db: mysql
-    - TOXENV: "py36-mysql-connector-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: mysql
-    - TOXENV: "py37-mysql-connector-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-      db: mysql
-    - TOXENV: "py27-pymysql-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27"
-      db: mysql
-    - TOXENV: "py36-pymysql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: mysql
-    - TOXENV: "py37-pymysql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-      db: mysql
-    - TOXENV: "py27-postgres-psycopg-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27"
-      db: postgresql
-    - TOXENV: "py36-postgres-psycopg-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: postgresql
-    - TOXENV: "py37-postgres-psycopg-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-      db: postgresql
-    - TOXENV: "py27-postgres-pygresql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27-x64"
-      db: postgresql
-    - TOXENV: "py36-postgres-pygresql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: postgresql
-    - TOXENV: "py37-postgres-pygresql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-      db: postgresql
-    - TOXENV: "py36-pypostgresql-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36"
-      db: postgresql
-    - TOXENV: "py37-pypostgresql-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37"
-      db: postgresql
-    - TOXENV: "py36-pypostgresql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: postgresql
-    - TOXENV: "py37-pypostgresql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-      db: postgresql
-    - TOXENV: "py27-postgres-pg8000-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27"
-      db: postgresql
-    - TOXENV: "py36-postgres-pg8000-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: postgresql
-    - TOXENV: "py37-postgres-pg8000-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-      db: postgresql
-    - TOXENV: "py27-sqlite-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27"
-    - TOXENV: "py36-sqlite-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-    - TOXENV: "py37-sqlite-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-    - TOXENV: "py27-sqlite-memory-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27"
-    - TOXENV: "py36-sqlite-memory-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-    - TOXENV: "py37-sqlite-memory-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
 
 matrix:
   fast_finish: true
@@ -184,9 +52,6 @@ install:
       Set-Service SQLBrowser -StartupType Manual
       Start-Service SQLBrowser
       Start-Service "MSSQL`$$instanceName"
-  # List ODBC drivers
-  - ps: Get-OdbcDriver -Platform 32-bit | Select-Object -ExpandProperty Name
-  - ps: Get-OdbcDriver -Platform 64-bit | Select-Object -ExpandProperty Name
   # Ensure we use the right python version
   - "SET PATH=%PYTHON_HOME%;%PYTHON_HOME%\\Scripts;C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin;C:\\Program Files\\PostgreSQL\\9.5\\bin;%PATH%"
   - "SET TOXPYTHON=%PYTHON_HOME%\\python.exe"
