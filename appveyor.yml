@@ -7,7 +7,7 @@ version: '{branch}-{build}'
 # Other branches can allow themselves.
 branches:
   only:
-    - master
+    - pyodbc-test
 skip_branch_with_pr: false
 skip_tags: true
 
@@ -17,15 +17,7 @@ cache:
 # Match travis
 clone_depth: 50
 
-services:
-  - mysql
-  - postgresql
-
 environment:
-  MYSQL_PWD: "Password12!"
-  PGUSER: "postgres"
-  PGPASSWORD: "Password12!"
-
   global:
     # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
     # /E:ON and /V:ON options are not enabled in the batch script intepreter
@@ -38,130 +30,6 @@ environment:
       PYTHON_VERSION: "2.7"
       PYTHON_HOME: "C:\\Python27"
       db: mssql2014
-    - TOXENV: "py34-mssql-pyodbc-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.4"
-      PYTHON_HOME: "C:\\Python34-x64"
-      db: mssql2014
-    - TOXENV: "py27-mysql-connector-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27"
-      db: mysql
-    - TOXENV: "py36-mysql-connector-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: mysql
-    - TOXENV: "py37-mysql-connector-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-      db: mysql
-    - TOXENV: "py27-pymysql-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27"
-      db: mysql
-    - TOXENV: "py36-pymysql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: mysql
-    - TOXENV: "py37-pymysql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-      db: mysql
-    - TOXENV: "py27-postgres-psycopg-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27"
-      db: postgresql
-    - TOXENV: "py36-postgres-psycopg-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: postgresql
-    - TOXENV: "py37-postgres-psycopg-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-      db: postgresql
-    - TOXENV: "py27-postgres-pygresql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27-x64"
-      db: postgresql
-    - TOXENV: "py36-postgres-pygresql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: postgresql
-    - TOXENV: "py37-postgres-pygresql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-      db: postgresql
-    - TOXENV: "py36-pypostgresql-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36"
-      db: postgresql
-    - TOXENV: "py37-pypostgresql-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37"
-      db: postgresql
-    - TOXENV: "py36-pypostgresql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: postgresql
-    - TOXENV: "py37-pypostgresql-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-      db: postgresql
-    - TOXENV: "py27-postgres-pg8000-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27"
-      db: postgresql
-    - TOXENV: "py36-postgres-pg8000-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-      db: postgresql
-    - TOXENV: "py37-postgres-pg8000-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-      db: postgresql
-    - TOXENV: "py27-sqlite-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27"
-    - TOXENV: "py36-sqlite-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-    - TOXENV: "py37-sqlite-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
-    - TOXENV: "py27-sqlite-memory-w32"
-      PYTHON_ARCH: "32"
-      PYTHON_VERSION: "2.7"
-      PYTHON_HOME: "C:\\Python27"
-    - TOXENV: "py36-sqlite-memory-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.6"
-      PYTHON_HOME: "C:\\Python36-x64"
-    - TOXENV: "py37-sqlite-memory-w32"
-      PYTHON_ARCH: "64"
-      PYTHON_VERSION: "3.7"
-      PYTHON_HOME: "C:\\Python37-x64"
 
 matrix:
   fast_finish: true
